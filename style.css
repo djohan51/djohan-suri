@@ -1,0 +1,30 @@
+:root{--bg:#160d10;--card:#22151a;--ink:#f6e9ec;--muted:#c9a9b1;--rose:#e2557a}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Inter,sans-serif}
+.car{position:relative;height:72vh;max-height:680px;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1s}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover}
+.slide:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,var(--bg))}
+.nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;background:#0007;border:0;color:#fff;font-size:28px;width:44px;height:44px;border-radius:50%;cursor:pointer}
+.prev{left:16px}.next{right:16px}
+.dots{position:absolute;bottom:18px;width:100%;text-align:center;z-index:2}
+.dots b{display:inline-block;width:8px;height:8px;margin:0 4px;border-radius:50%;background:#fff6;cursor:pointer}
+.dots b.on{background:var(--rose)}
+header{text-align:center;padding:10px 16px 30px;margin-top:-60px;position:relative;z-index:3}
+h1{font-family:"Playfair Display",serif;font-size:clamp(32px,7vw,58px)}
+h1 span{color:var(--rose)}
+.since{color:var(--muted);margin:8px 0 26px}
+.cnt{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:760px;margin:auto}
+.u{background:var(--card);border:1px solid #3a2229;border-radius:14px;padding:14px 8px;min-width:96px;flex:1}
+.u strong{display:block;font-size:clamp(26px,5vw,38px);font-variant-numeric:tabular-nums}
+.u small{color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:.1em}
+.tot{color:var(--muted);margin-top:18px;font-size:14px}
+h2{font-family:"Playfair Display",serif;font-style:italic;font-weight:500;text-align:center;font-size:clamp(30px,6vw,46px);margin:50px 0 24px}
+.gal{columns:3 260px;gap:14px;padding:0 16px 60px;max-width:1100px;margin:auto}
+.gal img{width:100%;border-radius:12px;margin-bottom:14px;cursor:zoom-in;transition:transform .3s;display:block}
+.gal img:hover{transform:scale(1.02)}
+.lb{position:fixed;inset:0;background:#000e;display:none;align-items:center;justify-content:center;z-index:9;padding:16px}
+.lb.on{display:flex}
+.lb img{max-width:100%;max-height:92vh;border-radius:10px}
+footer{text-align:center;color:var(--muted);padding:0 16px 40px}
