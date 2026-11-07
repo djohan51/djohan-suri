@@ -3,7 +3,7 @@ const PASTA = "fotos/";             // pasta das fotos
 const EXTENSAO = ".jpg";            // fotos nomeadas 1.jpg, 2.jpg, 3.jpg...
 const MAX_FOTOS = 500;              // limite de busca
 const FOTOS_NO_CARROSSEL = 6;       // quantas fotos aleatórias vão no carrossel
-const INICIO = new Date("2025-11-23T00:00:00-03:00"); // 23/11/2025, horário de Brasília
+const INICIO = new Date("2025-11-23T13:30:00-03:00"); // 23/11/2025 às 13h30, horário de Brasília
 
 // ===== CARREGA AS FOTOS 1.jpg, 2.jpg, ... ATÉ NÃO ACHAR MAIS =====
 function existe(src){
@@ -75,3 +75,45 @@ tick(); setInterval(tick, 1000);
 
 // ===== INICIA =====
 carregarFotos().then(fotos => { montarGaleria(fotos); montarCarrossel(fotos); });
+
+// ===== BALÕES DE CORAÇÃO =====
+const BALAO_INTERVALO = 3500; // a cada quantos ms sobe um balão (3500 = 3,5 s)
+const CORES = ["#e2557a", "#ff6b8b", "#ff3d68", "#f78fb3", "#c9184a"];
+
+function criarBalao(){
+  const b = document.createElement("div");
+  b.className = "balao";
+  const tam = 46 + Math.random() * 30;
+  b.style.left = (5 + Math.random() * 85) + "vw";
+  b.style.fontSize = tam + "px";
+  b.style.color = CORES[Math.floor(Math.random() * CORES.length)];
+  b.style.animationDuration = (9 + Math.random() * 6) + "s";
+  b.innerHTML = '<span class="cor">♥</span><span class="fio"></span>';
+  b.addEventListener("click", e => estourar(b, e.clientX, e.clientY));
+  b.addEventListener("animationend", () => b.remove());
+  document.body.appendChild(b);
+}
+
+function estourar(b, x, y){
+  if (b.classList.contains("pop")) return;
+  b.classList.add("pop");
+  setTimeout(() => b.remove(), 250);
+  for (let k = 0; k < 12; k++){ // pedacinhos
+    const p = document.createElement("span");
+    p.className = "pedaco"; p.textContent = "♥"; p.style.color = b.style.color;
+    p.style.left = x + "px"; p.style.top = y + "px";
+    const ang = (Math.PI * 2 * k) / 12, dist = 60 + Math.random() * 50;
+    p.style.setProperty("--x", Math.cos(ang) * dist + "px");
+    p.style.setProperty("--y", Math.sin(ang) * dist + "px");
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 900);
+  }
+  const t = document.createElement("div"); // texto "Te amo"
+  t.className = "teamo"; t.textContent = "Te amo ♥";
+  t.style.left = x + "px"; t.style.top = y + "px";
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 1800);
+}
+
+setTimeout(criarBalao, 1500);
+setInterval(criarBalao, BALAO_INTERVALO);

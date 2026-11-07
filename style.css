@@ -28,3 +28,20 @@ h2{font-family:"Playfair Display",serif;font-style:italic;font-weight:500;text-a
 .lb.on{display:flex}
 .lb img{max-width:100%;max-height:92vh;border-radius:10px}
 footer{text-align:center;color:var(--muted);padding:0 16px 40px}
+.msg{max-width:720px;margin:50px auto 0;padding:32px 24px;background:var(--card);border:1px solid #3a2229;border-radius:18px;text-align:center}
+.msg p{font-family:"Playfair Display",serif;font-style:italic;font-size:clamp(18px,3.5vw,22px);line-height:1.7;white-space:pre-line}
+
+/* ===== BALÕES DE CORAÇÃO ===== */
+.balao{position:fixed;bottom:-120px;z-index:8;cursor:pointer;line-height:1;display:flex;flex-direction:column;align-items:center;animation:subir linear forwards;user-select:none;-webkit-tap-highlight-color:transparent}
+.balao .cor{filter:drop-shadow(0 6px 10px #0006);animation:balanco 2.5s ease-in-out infinite alternate;display:block}
+.balao .fio{width:1px;height:1.2em;background:#ffffff55}
+.balao.pop{animation-play-state:paused}
+.balao.pop .cor{animation:estoura .25s forwards}
+.balao.pop .fio{opacity:0}
+@keyframes subir{to{transform:translateY(calc(-100vh - 200px))}}
+@keyframes balanco{from{transform:rotate(-8deg) translateX(-6px)}to{transform:rotate(8deg) translateX(6px)}}
+@keyframes estoura{to{transform:scale(1.8);opacity:0}}
+.pedaco{position:fixed;z-index:9;font-size:16px;pointer-events:none;transform:translate(-50%,-50%);animation:voar .9s ease-out forwards}
+@keyframes voar{to{transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(.4);opacity:0}}
+.teamo{position:fixed;z-index:10;pointer-events:none;transform:translate(-50%,-50%);font-family:"Playfair Display",serif;font-style:italic;font-size:clamp(28px,6vw,42px);color:#fff;text-shadow:0 0 18px #e2557a,0 2px 6px #000;animation:teamo 1.8s ease-out forwards;white-space:nowrap}
+@keyframes teamo{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}100%{opacity:0;transform:translate(-50%,-140%) scale(1)}}
